@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Chart JS -->
+
+    <!-- datasource -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datasource@0.1.0"></script>
+
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+
+    <title>Defaulter Prediction</title>
+</head>
+
+<body>
+
+    <h1 class="text-center">Defaulter Prediction</h1>
+    <div class="container my-4">
+
+        <div class="row">
+
+            <div class="col my-4">
+
+                <div class="alert alert-info" role="alert">1. Title: Defaulter Prediction
+                    <br><br> 2. Sources:
+                    <br> There are 24 variables:
+
+                    <br>LIMIT_BAL: Amount of given credit in dollars<br>
+                   
+                    <br>Gender: (1=male, 2=female)<br>
+
+                    <br>EDUCATION: (1=university,2=graduate school,3=high school,4=Graduate_Int,5=PG_Int,6=NoEdu,7=PG)<br>
+
+                    <br>MARRIAGE: Marital status (1=married, 2=single, 3=others)<br>
+
+                    <br>AGE: Age in years<br>
+
+                    <br>PAY_0: Repayment status in January (-1=pay duly, 1=payment delay for one month, 2=payment delay for two months, … 8=payment delay for eight months, 9=payment delay for nine months and above)<br>
+
+                    <br>PAY_2: Repayment status in February (scale same as above)<br>
+
+                     <br>PAY_3: Repayment status in March (scale same as above)<br>
+
+                     <br>PAY_4: Repayment status in April (scale same as above)<br>
+
+                     <br>PAY_5: Repayment status in May (scale same as above)<br>
+
+                     <br>PAY_6: Repayment status in June (scale same as above)<br>
+
+                     <br>BILL_AMT1: Amount of bill statement in January (dollar)<br>
+
+                     <br>BILL_AMT2: Amount of bill statement in February (dollar)<br>
+
+                     <br>BILL_AMT3: Amount of bill statement in March (dollar)<br>
+
+                     <br>BILL_AMT4: Amount of bill statement in April (dollar)<br>
+
+                     <br>BILL_AMT5: Amount of bill statement in May (dollar)<br>
+
+                     <br>BILL_AMT6: Amount of bill statement in June (dollar)<br>
+
+                     <br>PAY_AMT1: Amount of previous payment in January (dollar)<br>
+
+                     <br>PAY_AMT2: Amount of previous payment in February (dollar)<br>
+
+                     <br>PAY_AMT3: Amount of previous payment in March (dollar)<br>
+
+                     <br>PAY_AMT4: Amount of previous payment in April (dollar)<br>
+
+                     <br>PAY_AMT5: Amount of previous payment in May (dollar)<br>
+
+                     <br>PAY_AMT6: Amount of previous payment in June (dollar)<br>
+
+                     <br>default payment next month: Default payment (1=yes, 0=no)<br>
+                    
+                </div>
+            </div>
+
+            <div class="col my-4">
+
+                <h3 class="text-center">Defaulter Prediction</h3>
+
+                <!-- Dropdown -->
+                <br>
+
+                <div class="row">
+
+                    <div class="col">
+                        <form action="/" method="POST">
+                             
+                            <div class="form-group my-4 mx-4 text-center">
+                                <h5 class="text-center">Enter following values to Predict Defaulters</h5>
+                                
+                            </div>
+
+                             <div class="form-group my-4 mx-4">
+                                
+                                     <!--LIMIT_BAL-->
+                                     <div class="form-group">
+                                        <label for="tech">Amout of given Credit</label>
+                                        
+                                                <input class="form-control" type="number" id="tech" name="LIMIT_BAL">
+                                    </div>
+
+                                    <!--Gender-->
+                                    <div class="form-group">
+                                        <label for="tech">Select the Gender</label>
+                                        <select class="form-control" id="tech" name="Gender">
+                                                <option value="1">Female</option>
+                                                <option value="2">Male</option>
+                                        </select>
+                                    </div>
+                                        
+
+                                    
+                                    <!--Education-->
+
+                                    <div class="form-group">
+                                        <label for="tech">Select the Education</label>
+                                        <select class="form-control" id="tech" name="Education">
+                                                <option value="1">university</option>
+                                                <option value="2">graduate school</option>
+                                                <option value="3">high school</option>
+                                                <option value="4">Graduate_Int</option>
+                                                <option value="5">PG_Int</option>
+                                                <option value="6">NoEdu</option>
+                                                <option value="7">PG</option>
+                                        </select>
+                                    </div>
+
+                                    <!--Marriage-->
+                                    <div class="form-group">
+                                        <label for="tech">Select the Marriage Status</label>
+                                        <select class="form-control" id="tech" name="marriage">
+                                                <option value="1">single</option>
+                                                <option value="2">Married</option>
+                                                <option value="3">others</option>
+                                        </select>
+                                    </div>
+
+                                    <!--Age-->
+                                    <div class="form-group">
+                                        <label for="tech">Enter the Age</label>
+                                        
+                                                <input class="form-control" type="number" id="tech" name="age">
+                                    </div>
+
+                                    <!--Payment Status in January-->
+
+                                    <div class="form-group">
+                                        <label for="tech">Payment Status in January</label>
+                                        <select class="form-control" id="tech" name="pay_0">
+                                                <option value="-1">Paid duly</option>
+                                                <option value="1">PaymentDelay By one Month</option>
+                                                <option value="2">PaymentDelay By two Month</option>
+                                                <option value="3">PaymentDelay By three Month</option>
+                                                <option value="4">PaymentDelay By four Month</option>
+                                                <option value="5">PaymentDelay By five Month</option>
+                                                <option value="6">PaymentDelay By six Month</option>
+                                                <option value="7">PaymentDelay By seven Month</option>
+                                                <option value="8">PaymentDelay By eight Month</option>
+                                                <option value="9">PaymentDelay By Nine Month</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!--Payment Status in February-->
+
+                                    <div class="form-group">
+                                        <label for="tech">Payment Status in February</label>
+                                        <select class="form-control" id="tech" name="pay_2">
+                                            <option value="-1">Paid duly</option>
+                                            <option value="1">PaymentDelay By one Month</option>
+                                            <option value="2">PaymentDelay By two Month</option>
+                                            <option value="3">PaymentDelay By three Month</option>
+                                            <option value="4">PaymentDelay By four Month</option>
+                                            <option value="5">PaymentDelay By five Month</option>
+                                            <option value="6">PaymentDelay By six Month</option>
+                                            <option value="7">PaymentDelay By seven Month</option>
+                                            <option value="8">PaymentDelay By eight Month</option>
+                                            <option value="9">PaymentDelay By Nine Month</option>
+                                        </select>
+                                    </div>
+
+
+                                    <!--Payment Status in March-->
+
+                                    <div class="form-group">
+                                        <label for="tech">Payment Status in March</label>
+                                        <select class="form-control" id="tech" name="pay_3">
+                                            <option value="-1">Paid duly</option>
+                                            <option value="1">PaymentDelay By one Month</option>
+                                            <option value="2">PaymentDelay By two Month</option>
+                                            <option value="3">PaymentDelay By three Month</option>
+                                            <option value="4">PaymentDelay By four Month</option>
+                                            <option value="5">PaymentDelay By five Month</option>
+                                            <option value="6">PaymentDelay By six Month</option>
+                                            <option value="7">PaymentDelay By seven Month</option>
+                                            <option value="8">PaymentDelay By eight Month</option>
+                                            <option value="9">PaymentDelay By Nine Month</option>
+                                        </select>
+                                    </div>
+
+                                    <!--Payment Status in April-->
+
+                                    <div class="form-group">
+                                        <label for="tech">Payment Status in April</label>
+                                        <select class="form-control" id="tech" name="pay_4">
+                                            <option value="-1">Paid duly</option>
+                                            <option value="1">PaymentDelay By one Month</option>
+                                            <option value="2">PaymentDelay By two Month</option>
+                                            <option value="3">PaymentDelay By three Month</option>
+                                            <option value="4">PaymentDelay By four Month</option>
+                                            <option value="5">PaymentDelay By five Month</option>
+                                            <option value="6">PaymentDelay By six Month</option>
+                                            <option value="7">PaymentDelay By seven Month</option>
+                                            <option value="8">PaymentDelay By eight Month</option>
+                                            <option value="9">PaymentDelay By Nine Month</option>
+                                        </select>
+                                    </div>
+
+                                    <!--Payment Status in May-->
+
+                                    <div class="form-group">
+                                        <label for="tech">Payment Status in May</label>
+                                        <select class="form-control" id="tech" name="pay_5">
+                                            <option value="-1">Paid duly</option>
+                                            <option value="1">PaymentDelay By one Month</option>
+                                            <option value="2">PaymentDelay By two Month</option>
+                                            <option value="3">PaymentDelay By three Month</option>
+                                            <option value="4">PaymentDelay By four Month</option>
+                                            <option value="5">PaymentDelay By five Month</option>
+                                            <option value="6">PaymentDelay By six Month</option>
+                                            <option value="7">PaymentDelay By seven Month</option>
+                                            <option value="8">PaymentDelay By eight Month</option>
+                                            <option value="9">PaymentDelay By Nine Month</option>
+                                        </select>
+                                    </div>
+
+                                    <!--Payment Status in June-->
+
+                                    <div class="form-group">
+                                        <label for="tech">Payment Status in June</label>
+                                        <select class="form-control" id="tech" name="pay_6">
+                                            <option value="-1">Paid duly</option>
+                                            <option value="1">PaymentDelay By one Month</option>
+                                            <option value="2">PaymentDelay By two Month</option>
+                                            <option value="3">PaymentDelay By three Month</option>
+                                            <option value="4">PaymentDelay By four Month</option>
+                                            <option value="5">PaymentDelay By five Month</option>
+                                            <option value="6">PaymentDelay By six Month</option>
+                                            <option value="7">PaymentDelay By seven Month</option>
+                                            <option value="8">PaymentDelay By eight Month</option>
+                                            <option value="9">PaymentDelay By Nine Month</option>
+                                        </select>
+                                    </div>
+
+                                    <!--Bill amount statement in January-->
+
+                                    <div class="form-group">
+                                        <label for="tech">Bill amount statement in January</label>
+                                        <input class="form-control" type="number" id="tech" name="BILL_AMT1">
+                                    </div>
+                                    
+                                    <!--Bill amount statement in February-->
+
+                                    <div class="form-group">
+                                        <label for="tech">Bill amount statement in February</label>
+                                        <input class="form-control" type="number" id="tech" name="BILL_AMT2">
+                                    </div>
+                                    
+                                     <!--Bill amount statement in March-->
+
+                                     <div class="form-group">
+                                        <label for="tech">Bill amount statement in March</label>
+                                        <input class="form-control" type="number" id="tech" name="BILL_AMT3">
+                                    </div>
+
+                                     <!--Bill amount statement in April-->
+
+                                     <div class="form-group">
+                                        <label for="tech">Bill amount statement in April</label>
+                                        <input class="form-control" type="number" id="tech" name="BILL_AMT4">
+                                    </div>
+
+                                     <!--Bill amount statement in May-->
+
+                                     <div class="form-group">
+                                        <label for="tech">Bill amount statement in May</label>
+                                        <input class="form-control" type="number" id="tech" name="BILL_AMT5">
+                                    </div>
+                                    
+                                     <!--Bill amount statement in June-->
+
+                                     <div class="form-group">
+                                        <label for="tech">Bill amount statement in June</label>
+                                        <input class="form-control" type="number" id="tech" name="BILL_AMT6">
+                                    </div>
+
+                                     <!--Amount of previous payment in January-->
+
+                                     <div class="form-group">
+                                        <label for="tech">Amount of previous payment in January-</label>
+                                        <input class="form-control" type="number" id="tech" name="PAY_AMT1">
+                                    </div>
+                                     <!--Amount of previous payment in February-->
+
+                                    <div class="form-group">
+                                        <label for="tech">Amount of previous payment in February</label>
+                                        <input class="form-control" type="number" id="tech" name="PAY_AMT2">
+                                    </div>
+
+                                      <!--Amount of previous payment in March-->
+
+                                    <div class="form-group">
+                                        <label for="tech">Amount of previous payment in March</label>
+                                        <input class="form-control" type="number" id="tech" name="PAY_AMT3">
+                                    </div>
+
+                                    <!--Amount of previous payment in April-->
+
+                                    <div class="form-group">
+                                        <label for="tech">Amount of previous payment in April</label>
+                                        <input class="form-control" type="number" id="tech" name="PAY_AMT4">
+                                    </div>
+
+
+                                    <!--Amount of previous payment in May-->
+
+                                    <div class="form-group">
+                                        <label for="tech">Amount of previous payment in May</label>
+                                        <input class="form-control" type="number" id="tech" name="PAY_AMT5">
+                                    </div>
+
+
+                                     <!--Amount of previous payment in June-->
+
+                                    <div class="form-group">
+                                        <label for="tech">Amount of previous payment in June</label>
+                                        <input class="form-control" type="number" id="tech" name="PAY_AMT6">
+                                    </div>
+
+
+                                    <!--Select the Classifier-->
+                                    <div class="form-group">
+                                        <label for="tech">Select the Classifier</label>
+                                        <select class="form-control" id="tech" name="algo">
+                                                <option value="rf">Random Forest Classifier</option>
+                                                <option value="dt">Decision Tree Classifier</option>
+                                                <option value="svc">Support Vector Classifier</option>
+                                        </select>
+                                    </div>
+
+
+                                    <!-- button -->
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Predict</button>
+                                    </div>
+                             </div>
+
+
+
+                        </form>
+                    </div>
+
+
+                    {%if display%}
+                        
+                        {%if showtemplate%}
+
+                            <div class="alert alert-success" role="alert">
+                                <h4 class="alert-heading">Model Evaluation is Completed!</h4>
+                                <p>Based on the above details filled,the Probability of person next month : {{predictedclass}} with an accuracy of {{accuracy}} %</p>
+                                <hr>
+                            </div>
+                        {%endif%}
+
+                    
+
+                    {%else%}
+
+                        
+
+
+                    {%endif%}
+
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+ 
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>
